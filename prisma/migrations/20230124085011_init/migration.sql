@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "SecondTag" ADD COLUMN     "order" INTEGER NOT NULL DEFAULT 5;

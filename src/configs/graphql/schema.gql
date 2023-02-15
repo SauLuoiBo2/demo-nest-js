@@ -1,0 +1,1290 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input AddQuestionOnExerciseInput {
+  questionId: Int!
+}
+
+type Auth {
+  """Email user"""
+  email: String!
+
+  """Role user"""
+  role: String!
+
+  """Id user"""
+  userId: Int!
+}
+
+input BasicListIdInput {
+  id: Int!
+}
+
+input ChangePasswordInput {
+  email: String!
+}
+
+type Chapter {
+  course: Course
+
+  """content field"""
+  courseId: Int!
+
+  """detail field"""
+  createdAt: DateTime!
+
+  """description field"""
+  description: String
+
+  """detail field"""
+  detail: String
+  documments: [DocummentOn!]
+  exercises: [ExercisesOn!]
+
+  """Id field"""
+  id: Int!
+
+  """Name field"""
+  name: String!
+
+  """detail field"""
+  order: Int!
+
+  """detail field"""
+  slide: String
+
+  """Slug field"""
+  slug: String!
+
+  """detail field"""
+  time: Int
+
+  """detail field"""
+  updatedAt: DateTime!
+
+  """video"""
+  video: String
+}
+
+type ChapterOn {
+  chapter: Chapter
+  chapterId: Int
+}
+
+type CountFirstTagEntity {
+  courses: Int!
+  secondTags: Int!
+  targets: Int!
+}
+
+type CountSecondTagEntity {
+  thirdTags: Int
+}
+
+type CountSubjectEntity {
+  exercises: Int!
+  firstTags: Int!
+  questions: Int!
+  teachers: Int!
+}
+
+type CountTargetEntity {
+  firstTags: Int!
+}
+
+type CountTeacherEntity {
+  courses: Int!
+  exercises: Int!
+  questions: Int!
+  subjects: Int!
+}
+
+type Course {
+  chapters: [Chapter!]
+
+  """content field"""
+  color: String
+
+  """content field"""
+  content: String!
+
+  """content field"""
+  createdAt: DateTime!
+
+  """description field"""
+  description: String!
+
+  """detail field"""
+  detail: String!
+  firstTags: [FirstTagOn!]
+
+  """Id field"""
+  id: Int!
+
+  """content field"""
+  level: Int
+
+  """Name field"""
+  name: String!
+
+  """Slug field"""
+  slug: String!
+  teacher: Teacher
+
+  """content field"""
+  teacherId: Int!
+
+  """content field"""
+  thumb: String
+
+  """content field"""
+  totalChapter: Int!
+
+  """content field"""
+  totalTime: Int
+
+  """content field"""
+  updatedAt: DateTime!
+}
+
+type CourseOn {
+  course: Course
+  courseId: Int
+}
+
+input CreateChapterInput {
+  """description FirstTag"""
+  courseId: Int
+
+  """description FirstTag"""
+  description: String
+
+  """description FirstTag"""
+  detail: String
+  name: String!
+
+  """description FirstTag"""
+  order: Int
+
+  """description FirstTag"""
+  slide: String
+
+  """description FirstTag"""
+  time: Int
+}
+
+input CreateCourseInput {
+  """Example field (placeholder)"""
+  color: String!
+
+  """description FirstTag"""
+  description: String
+
+  """description FirstTag"""
+  detail: String
+
+  """Example field (placeholder)"""
+  level: Float!
+  name: String!
+
+  """Example field (placeholder)"""
+  teacherId: Float!
+
+  """thumb course"""
+  thumb: Upload
+
+  """Example field (placeholder)"""
+  totalTime: Float!
+}
+
+input CreateDocummentInput {
+  """description FirstTag"""
+  description: String
+
+  """description FirstTag"""
+  detail: String
+  name: String!
+
+  """Example field (placeholder)"""
+  url: String!
+}
+
+input CreateExerciseInput {
+  """Name field"""
+  code: String!
+
+  """Name field"""
+  description: String!
+
+  """Name field"""
+  level: Int!
+
+  """Name field"""
+  name: String!
+
+  """Name field"""
+  subjectId: Int!
+
+  """Name field"""
+  teacherId: Int
+}
+
+input CreateFirstTagInput {
+  """description FirstTag"""
+  description: String
+
+  """description FirstTag"""
+  detail: String
+
+  """Name FirstTag"""
+  name: String!
+
+  """birthday teacher"""
+  order: Int
+
+  """Example field (placeholder)"""
+  subjectId: Int!
+}
+
+input CreateQuestionInput {
+  """answer Explain field"""
+  answerExplain: String
+
+  """answer Video field"""
+  answerVideo: String
+
+  """description FirstTag"""
+  code: String!
+
+  """description FirstTag"""
+  description: String
+
+  """description FirstTag"""
+  detail: String
+
+  """Example field (placeholder)"""
+  level: Int!
+  name: String!
+
+  """Example field (placeholder)"""
+  subjectId: Int!
+
+  """Example field (placeholder)"""
+  teacherId: Int!
+
+  """description FirstTag"""
+  video: String
+}
+
+input CreateSecondTagInput {
+  """description FirstTag"""
+  description: String
+
+  """description FirstTag"""
+  detail: String
+
+  """Example field (placeholder)"""
+  firstTagId: Int!
+  name: String!
+
+  """birthday teacher"""
+  order: Int
+}
+
+input CreateSubjectInput {
+  code: String
+  name: String
+  order: Int
+}
+
+input CreateTargetInput {
+  """description FirstTag"""
+  description: String
+
+  """description FirstTag"""
+  detail: String
+
+  """Name Target"""
+  name: String!
+
+  """birthday teacher"""
+  order: Int
+}
+
+input CreateTeacherInput {
+  """address teacher"""
+  address: String
+
+  """avatar teacher"""
+  avatar: Upload
+
+  """birthday teacher"""
+  birthday: String
+
+  """description FirstTag"""
+  description: String
+
+  """description FirstTag"""
+  detail: String
+
+  """fb_url teacher"""
+  fb_url: String
+
+  """Name teacher"""
+  name: String!
+
+  """birthday teacher"""
+  order: Int
+
+  """tiktok_url teacher"""
+  tiktok_url: String
+}
+
+input CreateThirdTagInput {
+  """description FirstTag"""
+  description: String
+
+  """description FirstTag"""
+  detail: String
+
+  """Name ThirdTag"""
+  name: String!
+
+  """birthday teacher"""
+  order: Int
+
+  """Example field (placeholder)"""
+  secondTagId: Int!
+}
+
+input CreateUserInput {
+  """avatar user"""
+  avatar: Upload
+  email: String
+  firstName: String
+  lastName: String
+  password: String
+  role: String
+  status: String
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type DetailUserResponse {
+  avatar: String
+  createdAt: DateTime!
+  email: String!
+  emailedAt: DateTime
+  firstName: String
+  forgotToken: String
+
+  """Id user"""
+  id: Int
+  isGoogle: Boolean!
+  lastName: String
+  role: String
+  status: String
+  updatedAt: DateTime!
+}
+
+type Documment {
+  chapters: [ChapterOn!]
+
+  """createdAt field"""
+  createdAt: DateTime!
+
+  """description field"""
+  description: String!
+
+  """detail field"""
+  detail: String!
+
+  """Id field"""
+  id: Int!
+
+  """Name field"""
+  name: String!
+
+  """updatedAt field"""
+  updatedAt: DateTime!
+
+  """url field"""
+  url: String!
+}
+
+type DocummentOn {
+  documment: Documment
+  docummentId: Int
+}
+
+type Exercise {
+  chapters: [ChapterOn!]
+
+  """Name field"""
+  code: String!
+
+  """Name field"""
+  createdAt: DateTime!
+
+  """Name field"""
+  description: String!
+
+  """Id field"""
+  id: Int!
+
+  """Name field"""
+  level: Int!
+
+  """Name field"""
+  name: String!
+  questions: [QuestionOn!]
+  subject: Subject
+
+  """Name field"""
+  subjectId: Int!
+  teacher: Teacher
+
+  """Name field"""
+  teacherId: Int!
+
+  """Name field"""
+  updatedAt: DateTime!
+}
+
+type ExercisesOn {
+  exercise: Exercise
+  exerciseId: Int
+}
+
+type FirstTag {
+  _count: CountFirstTagEntity
+  courses: [CourseOn!]
+  createdAt: DateTime!
+  description: String!
+  detail: String!
+
+  """Id field"""
+  id: Int!
+
+  """Name field"""
+  name: String!
+
+  """Id field"""
+  order: Int!
+  secondTags: [SecondTag!]
+
+  """Slug field"""
+  slug: String!
+  subject: Subject
+  subjectId: Float!
+  targets: [TargetOn!]
+  updatedAt: DateTime!
+}
+
+type FirstTagOn {
+  firstTag: FirstTag
+  firstTagId: Int
+}
+
+input ForgotInput {
+  email: String!
+}
+
+type ImageCloudinaryResponse {
+  asset_id: String
+  bytes: Int
+  created_at: DateTime
+  folder: String
+  format: String
+  height: Int
+  public_id: String
+  resource_type: String
+  secure_url: String
+  type: String
+  url: String
+  version: Int
+  width: Int
+}
+
+type ImagesCloudinaryResponse {
+  resources: [ImageCloudinaryResponse!]
+}
+
+type ListChapterResponse {
+  data: [Chapter!]!
+  meta: MetaListType!
+}
+
+type ListCourseResponse {
+  data: [Course!]!
+  meta: MetaListType!
+}
+
+type ListDocummentResponse {
+  data: [Documment!]!
+  meta: MetaListType!
+}
+
+type ListExerciseResponse {
+  data: [Exercise!]!
+  meta: MetaListType!
+}
+
+type ListFirstTagResponse {
+  data: [FirstTag!]!
+  meta: MetaListType!
+}
+
+type ListQuestionResponse {
+  data: [Question!]!
+  meta: MetaListType!
+}
+
+type ListSecondTagResponse {
+  data: [SecondTag!]!
+  meta: MetaListType!
+}
+
+type ListTeacherResponse {
+  data: [Teacher!]!
+  meta: MetaListType!
+}
+
+type ListThirdTagResponse {
+  data: [ThirdTag!]!
+  meta: MetaListType!
+}
+
+type ListUserResponse {
+  data: [User!]!
+  meta: MetaListType!
+}
+
+type LogoutResponse {
+  isLoggedOut: Boolean!
+}
+
+type MetaListType {
+  currentPage: Int!
+  lastPage: Int!
+  next: Int
+  perPage: Int!
+  prev: Int
+  total: Int!
+}
+
+type Mutation {
+  changePass(changePasswordInput: ChangePasswordInput!, updateUserInput: UpdateUserInput!): String!
+  createChapter(addDocummentOnChapterInput: [BasicListIdInput!] = [], createChapterInput: CreateChapterInput!): Chapter!
+  createCourse(createCourseInput: CreateCourseInput!, listFirstTagInput: [BasicListIdInput!] = []): Course!
+  createDocumment(createDocummentInput: CreateDocummentInput!): Documment!
+  createExercise(addQuestionOnExerciseInput: [AddQuestionOnExerciseInput!] = [], createExerciseInput: CreateExerciseInput!): Exercise!
+  createFirstTag(addTargetOnFirstTagInput: [BasicListIdInput!] = [], createFirstTagInput: CreateFirstTagInput!): FirstTag!
+  createQuestion(addThirdTagOnQuestionInput: [BasicListIdInput!] = [], createQuestionInput: CreateQuestionInput!): Question!
+  createQuickTeacher(createTeacherInput: CreateTeacherInput!, subjectListCreateInput: [SubjectListCreateInput!] = []): Teacher!
+  createSecondTag(createSecondTagInput: CreateSecondTagInput!): SecondTag!
+  createSubject(createSubjectInput: CreateSubjectInput!): Subject!
+  createTarget(createTargetInput: CreateTargetInput!): Target!
+  createTeacher(createTeacherInput: CreateTeacherInput!, file: Upload!): Teacher!
+  createThirdTag(createThirdTagInput: CreateThirdTagInput!): ThirdTag!
+  createUser(tokenVerify: String!): SignupResponse!
+  logout(id: Int!): LogoutResponse!
+  register(createUserInput: CreateUserInput!): SignupResponse!
+  registerTest(createUserInput: CreateUserInput!): SignupResponse!
+  removeChapter(id: Int!): Chapter!
+  removeCourse(id: Int!): Course!
+  removeDocumment(id: Int!): Documment!
+  removeExercise(id: Int!): Exercise!
+  removeFirstTag(id: Int!): FirstTag!
+  removeImageOnRichtext(name: String!): String!
+  removeQuestion(id: Int!): Question!
+  removeSecondTag(id: Int!): SecondTag!
+  removeSubject(id: Int!): Subject!
+  removeTarget(id: Int!): Target!
+  removeTeacher(id: Int!): Teacher!
+  removeThirdTag(id: Int!): ThirdTag!
+  removeUser(id: Int!): DetailUserResponse!
+  sendMailForgot(forgotInput: ForgotInput!): String!
+  signinAuth(SigninAuth: SigninInput!): SignResponse!
+  signinGoogle(idToken: String!): SignResponse!
+  updateChapter(listDocummentInput: [BasicListIdInput!], listExerciseInput: [BasicListIdInput!], updateChapterInput: UpdateChapterInput!): Chapter!
+  updateCourse(listFirstTagInput: [BasicListIdInput!], updateCourseInput: UpdateCourseInput!): Course!
+  updateDocumment(updateDocummentInput: UpdateDocummentInput!): Documment!
+  updateExercise(updateExerciseInput: UpdateExerciseInput!): Exercise!
+  updateFirstTag(addTargetOnFirstTagInput: [BasicListIdInput!], updateFirstTagInput: UpdateFirstTagInput!): FirstTag!
+  updateProfile(updateProfileInput: UpdateProfileInput!): DetailUserResponse!
+  updateQuestion(updateQuestionInput: UpdateQuestionInput!): Question!
+  updateSecondTag(updateSecondTagInput: UpdateSecondTagInput!): SecondTag!
+  updateSubject(updateSubjectInput: UpdateSubjectInput!): Subject!
+  updateTarget(updateTargetInput: UpdateTargetInput!): Target!
+  updateTeacher(subjectListCreateInput: [SubjectListCreateInput!], updateTeacherInput: UpdateTeacherInput!): Teacher!
+  updateThirdTag(updateThirdTagInput: UpdateThirdTagInput!): ThirdTag!
+  updateUser(updateUserInput: UpdateUserInput!): DetailUserResponse!
+  uploadFile(file: Upload!, folder: String!): String!
+  uploadImageOnRichtext(folder: String!, id: Int!, image: Upload!): String!
+  uploadMultiFile(files: Upload!): String!
+  uploadVideo(file: Upload!): String!
+  verifyEmail(token: String!): Boolean!
+}
+
+type NewTokensResponse {
+  accessToken: String!
+  expiredAt: Float!
+  refreshToken: String!
+}
+
+input PaginateInput {
+  createAt: String
+  page: Float!
+  perPage: Float!
+}
+
+type Query {
+  chapter(id: Int!): Chapter!
+  chapters(paginateInput: PaginateInput!, queryListChapterInput: QueryListChapterInput!): ListChapterResponse!
+  course(id: Int!): Course!
+  courses(paginateInput: PaginateInput!, queryListCourseInput: QueryListCourseInput!): ListCourseResponse!
+  documment(id: Int!): Documment!
+  documments(paginateInput: PaginateInput!, queryListDocummentInput: QueryListDocummentInput!): ListDocummentResponse!
+  email: String!
+  exercise(id: Int!): Exercise!
+  exercises(paginateInput: PaginateInput!, queryListExerciseInput: QueryListExerciseInput!): ListExerciseResponse!
+  firstTag(id: Int!): FirstTag!
+  firstTags(paginateInput: PaginateInput!, queryListFirstTagInput: QueryListFirstTagInput): ListFirstTagResponse!
+  firstTagsBySubject(id: Int!): [FirstTag!]!
+  getImage(image: String!): String!
+  getImageResolution(image: String!, resolution: Float!): String!
+  getImagesOnRichtext(folder: String!, id: Int!): ImagesCloudinaryResponse!
+  getNewTokens: NewTokensResponse!
+  profile: DetailUserResponse!
+  question(id: Int!): Question!
+  questions(paginateInput: PaginateInput!, queryListQuestionInput: QueryListQuestionInput!): ListQuestionResponse!
+  secondTag(id: Int!): SecondTag!
+  secondTags(paginateInput: PaginateInput!, queryListSecondTagInput: QueryListSecondTagInput!): ListSecondTagResponse!
+  secondTagsByFirstTag(id: Int!): [SecondTag!]!
+  subject(id: Int!): Subject!
+  subjects: [Subject!]!
+  target(id: Int!): Target!
+  targets(queryListTargetInput: QueryListTargetInput!): [Target!]!
+  teacher(id: Int!): Teacher!
+  teachers(paginateInput: PaginateInput!, queryListTeacherInput: QueryListTeacherInput): ListTeacherResponse!
+  thirdTag(id: Int!): ThirdTag!
+  thirdTags(paginateInput: PaginateInput!, queryListThirdTagInput: QueryListThirdTagInput!): ListThirdTagResponse!
+  user(id: Int!): DetailUserResponse!
+  users(paginateInput: PaginateInput!, queryListUserInput: QueryListUserInput): ListUserResponse!
+}
+
+input QueryListChapterInput {
+  courseId: Int
+  endDate: DateTime
+  name: String
+  startDate: DateTime
+}
+
+input QueryListCourseInput {
+  endDate: DateTime
+  firstTags: [BasicListIdInput!]
+  name: String
+  startDate: DateTime
+  teachers: [BasicListIdInput!]
+}
+
+input QueryListDocummentInput {
+  endDate: DateTime
+  name: String
+  startDate: DateTime
+}
+
+input QueryListExerciseInput {
+  endDate: DateTime
+  name: String
+  startDate: DateTime
+}
+
+input QueryListFirstTagInput {
+  endDate: DateTime
+  name: String
+  startDate: DateTime
+  subjectId: Float
+  targets: [BasicListIdInput!]
+}
+
+input QueryListQuestionInput {
+  endDate: DateTime
+  exerciseId: Float
+  name: String
+  startDate: DateTime
+  subjectId: Float
+  teacherId: Float
+  thirdTags: [BasicListIdInput!]
+}
+
+input QueryListSecondTagInput {
+  endDate: DateTime
+  firstTagId: Float
+  name: String
+  startDate: DateTime
+}
+
+input QueryListTargetInput {
+  endDate: DateTime
+  name: String
+  startDate: DateTime
+}
+
+input QueryListTeacherInput {
+  endDate: DateTime
+  name: String
+  startDate: DateTime
+  subjectId: [Float!]
+}
+
+input QueryListThirdTagInput {
+  endDate: DateTime
+  name: String
+  secondTagId: Float
+  startDate: DateTime
+}
+
+input QueryListUserInput {
+  email: String
+  endDate: DateTime
+  lastName: String
+  name: String
+  startDate: DateTime
+}
+
+type Question {
+  """Name field"""
+  answerExplain: String!
+
+  """Name field"""
+  answerVideo: String!
+
+  """Name field"""
+  code: String!
+
+  """Name field"""
+  createdAt: DateTime!
+
+  """Name field"""
+  description: String!
+
+  """Name field"""
+  detail: String!
+  exercises: [ExercisesOn!]
+
+  """Id field"""
+  id: Int!
+
+  """Id field"""
+  level: Int!
+
+  """Name field"""
+  name: String!
+  subject: Subject
+
+  """Id field"""
+  subjectId: Int!
+  teacher: Teacher
+
+  """Id field"""
+  teacherId: Int!
+  thirdTags: [QuestionOnThirdTag!]
+
+  """Name field"""
+  updatedAt: DateTime!
+
+  """Name field"""
+  video: String!
+}
+
+type QuestionOn {
+  question: Question
+  questionId: Int
+}
+
+type QuestionOnThirdTag {
+  question: Question
+  questionId: Int
+  thirdTag: ThirdTag
+  thirdTagId: Int
+}
+
+type SecondTag {
+  _count: CountSecondTagEntity
+  createdAt: DateTime!
+  description: String!
+  detail: String!
+  firstTag: FirstTag
+  firstTagId: Float!
+
+  """Id field"""
+  id: Int!
+
+  """Name field"""
+  name: String!
+
+  """Name field"""
+  order: Int!
+
+  """Slug field"""
+  slug: String!
+  thirdTags: [ThirdTagEntity!]
+  updatedAt: DateTime!
+}
+
+type SignResponse {
+  accessToken: String!
+  expiredAt: Float!
+  refreshToken: String!
+  user: Auth!
+}
+
+input SigninInput {
+  email: String!
+  password: String!
+}
+
+type SignupResponse {
+  avatar: String
+  createdAt: DateTime!
+  email: String!
+  emailedAt: DateTime
+  firstName: String
+  forgotToken: String
+  hashedRefreshToken: String
+
+  """Id user"""
+  id: Int
+  isGoogle: Boolean!
+  lastName: String
+  role: String
+  status: String
+  updatedAt: DateTime!
+}
+
+type Subject {
+  _count: CountSubjectEntity
+  code: String
+  createdAt: DateTime
+  firstTags: [FirstTag!]
+  id: Int!
+  name: String
+  order: Int
+  slug: String!
+  teachers: [TeacherOn!]
+  updatedAt: DateTime
+}
+
+type SubjectHi {
+  code: String
+  createdAt: DateTime
+  id: Int!
+  name: String
+  order: Int
+  slug: String!
+  updatedAt: DateTime
+}
+
+input SubjectListCreateInput {
+  id: Int!
+}
+
+type SubjectOn {
+  subject: SubjectHi
+  subjectId: Int
+}
+
+type Target {
+  _count: CountTargetEntity
+  createdAt: DateTime!
+  description: String!
+  detail: String!
+  firstTags: [FirstTagOn!]!
+
+  """Id field"""
+  id: Int!
+
+  """Name field"""
+  name: String!
+  order: Int
+
+  """Slug field"""
+  slug: String!
+  updatedAt: DateTime!
+}
+
+type TargetEntity {
+  createdAt: DateTime!
+  description: String!
+  detail: String!
+
+  """Id field"""
+  id: Int!
+
+  """Name field"""
+  name: String!
+  order: Int
+
+  """Slug field"""
+  slug: String!
+  updatedAt: DateTime!
+}
+
+type TargetOn {
+  target: TargetEntity
+  targetId: Int
+}
+
+type Teacher {
+  _count: CountTeacherEntity
+  address: String
+  avatar: String
+  birthday: String
+  createdAt: DateTime
+  description: String
+  detail: String
+  exercises: [Exercise!]
+  fb_url: String
+  id: Int
+  name: String
+  order: Int
+  questions: [Question!]
+  slug: String!
+  subjects: [SubjectOn!]
+  tiktok_url: String
+  updatedAt: DateTime
+}
+
+type TeacherHi {
+  address: String
+  avatar: String
+  birthday: String
+  createdAt: DateTime
+  description: String
+  detail: String
+  fb_url: String
+  id: Int
+  name: String
+  order: Int
+  slug: String!
+  tiktok_url: String
+  updatedAt: DateTime
+}
+
+type TeacherOn {
+  teacher: TeacherHi
+  teacherId: Float
+}
+
+type ThirdTag {
+  createdAt: DateTime!
+  description: String!
+  detail: String!
+
+  """Id field"""
+  id: Int!
+
+  """Name field"""
+  name: String!
+
+  """Id field"""
+  order: Int!
+  questions: [Question!]
+  secondTag: SecondTag
+  secondTagId: Float!
+
+  """Slug field"""
+  slug: String!
+  updatedAt: DateTime!
+}
+
+type ThirdTagEntity {
+  createdAt: DateTime!
+  description: String!
+  detail: String!
+
+  """Id field"""
+  id: Int!
+
+  """Name field"""
+  name: String!
+
+  """Id field"""
+  order: Int!
+  secondTagId: Float!
+
+  """Slug field"""
+  slug: String!
+  updatedAt: DateTime!
+}
+
+input UpdateChapterInput {
+  """description FirstTag"""
+  courseId: Int
+
+  """description FirstTag"""
+  description: String
+
+  """description FirstTag"""
+  detail: String
+  id: Int!
+  name: String
+
+  """description FirstTag"""
+  order: Int
+
+  """description FirstTag"""
+  slide: String
+
+  """description FirstTag"""
+  time: Int
+}
+
+input UpdateCourseInput {
+  """Example field (placeholder)"""
+  color: String
+
+  """description FirstTag"""
+  description: String
+
+  """description FirstTag"""
+  detail: String
+  id: Int!
+
+  """Example field (placeholder)"""
+  level: Float
+  name: String
+
+  """Example field (placeholder)"""
+  teacherId: Float
+
+  """thumb course"""
+  thumb: Upload
+
+  """Example field (placeholder)"""
+  totalTime: Float
+}
+
+input UpdateDocummentInput {
+  """description FirstTag"""
+  description: String
+
+  """description FirstTag"""
+  detail: String
+  id: Int!
+  name: String
+
+  """Example field (placeholder)"""
+  url: String
+}
+
+input UpdateExerciseInput {
+  """Name field"""
+  code: String
+
+  """Name field"""
+  description: String
+  id: Int!
+
+  """Name field"""
+  level: Int
+
+  """Name field"""
+  name: String
+
+  """Name field"""
+  subjectId: Int
+
+  """Name field"""
+  teacherId: Int
+}
+
+input UpdateFirstTagInput {
+  """description FirstTag"""
+  description: String
+
+  """description FirstTag"""
+  detail: String
+  id: Int!
+
+  """Name FirstTag"""
+  name: String
+
+  """birthday teacher"""
+  order: Int
+
+  """Example field (placeholder)"""
+  subjectId: Int
+}
+
+input UpdateProfileInput {
+  """avatar user"""
+  avatar: Upload
+  email: String
+  firstName: String
+  forgotToken: String
+  lastName: String
+  oldPassword: String
+  password: String
+  role: String
+  status: String
+}
+
+input UpdateQuestionInput {
+  """answer Explain field"""
+  answerExplain: String
+
+  """answer Video field"""
+  answerVideo: String
+
+  """description FirstTag"""
+  code: String
+
+  """description FirstTag"""
+  description: String
+
+  """description FirstTag"""
+  detail: String
+  id: Int!
+
+  """Example field (placeholder)"""
+  level: Int
+  name: String
+
+  """Example field (placeholder)"""
+  subjectId: Int
+
+  """Example field (placeholder)"""
+  teacherId: Int
+
+  """description FirstTag"""
+  video: String
+}
+
+input UpdateSecondTagInput {
+  """description FirstTag"""
+  description: String
+
+  """description FirstTag"""
+  detail: String
+
+  """Example field (placeholder)"""
+  firstTagId: Int
+  id: Int!
+  name: String
+
+  """birthday teacher"""
+  order: Int
+}
+
+input UpdateSubjectInput {
+  code: String
+  id: Int!
+  name: String
+  order: Int
+}
+
+input UpdateTargetInput {
+  """description FirstTag"""
+  description: String
+
+  """description FirstTag"""
+  detail: String
+  id: Int!
+
+  """Name Target"""
+  name: String
+
+  """birthday teacher"""
+  order: Int
+}
+
+input UpdateTeacherInput {
+  """address teacher"""
+  address: String
+
+  """avatar teacher"""
+  avatar: Upload
+
+  """birthday teacher"""
+  birthday: String
+
+  """description FirstTag"""
+  description: String
+
+  """description FirstTag"""
+  detail: String
+
+  """fb_url teacher"""
+  fb_url: String
+  id: Int!
+
+  """Name teacher"""
+  name: String
+
+  """birthday teacher"""
+  order: Int
+
+  """tiktok_url teacher"""
+  tiktok_url: String
+}
+
+input UpdateThirdTagInput {
+  """description FirstTag"""
+  description: String
+
+  """description FirstTag"""
+  detail: String
+  id: Int!
+
+  """Name ThirdTag"""
+  name: String
+
+  """birthday teacher"""
+  order: Int
+
+  """Example field (placeholder)"""
+  secondTagId: Int
+}
+
+input UpdateUserInput {
+  """avatar user"""
+  avatar: Upload
+  email: String
+  firstName: String
+  forgotToken: String
+  id: Int!
+  lastName: String
+  oldPassword: String
+  password: String
+  role: String
+  status: String
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
+type User {
+  avatar: String
+  createdAt: DateTime!
+  email: String!
+  emailedAt: DateTime
+  firstName: String
+  forgotToken: String
+  hashedPassword: String
+  hashedRefreshToken: String
+
+  """Id user"""
+  id: Int
+  isGoogle: Boolean!
+  lastName: String
+  role: String
+  status: String
+  updatedAt: DateTime!
+}

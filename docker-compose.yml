@@ -1,0 +1,56 @@
+# docker-compose.yml
+
+version: '3.8'
+services:
+  # Docker connection string: postgres://postgres:postgres@localhost:5432/
+
+  postgres:
+    image: postgres:13.5
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+
+  supabase-shadow:
+    image: supabase/postgres:14.1.0
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf
+    restart: unless-stopped
+    ports:
+      - 12345:54322
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      # 👇 Change this volume mapping to something that makes sense for you
+      - ~/.docker/storage/data:/var/lib/postgresql/data
+      - ~/.docker/storage/init:/docker-entrypoint-initdb.d
+
+  dbadmin:
+    image: dpage/pgadmin4
+    restart: always
+    ports:
+      - 5050:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: pgadmin4
+
+  redis:
+    image: 'redis:alpine'
+    ports:
+      - '6379:6379'
+
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+    ports:
+      - '8081:8081'
+    depends_on:
+      - redis
+
+volumes:
+  postgres:

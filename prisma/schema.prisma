@@ -1,0 +1,291 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model User {
+  id                 Int       @id @default(autoincrement())
+  firstName          String
+  lastName           String
+  hashedPassword     String?
+  hashedRefreshToken String?
+  forgotToken        String?
+  role               Role?     @default(USER)
+  email              String    @unique
+  isGoogle           Boolean   @default(false)
+  avatar             String?
+  status             Status?   @default(ACTIVE)
+  emailedAt          DateTime?
+  updatedAt          DateTime  @updatedAt
+  createdAt          DateTime  @default(now())
+}
+
+enum Role {
+  USER
+  ADMIN
+  STAFF
+}
+
+enum Status {
+  ACTIVE
+  INACTIVE
+}
+
+model Subject {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  slug  String @unique
+  code  String @unique
+  order Int?   @default(5)
+
+  updatedAt DateTime           @updatedAt
+  createdAt DateTime           @default(now())
+  teachers  SubjectOnTeacher[]
+  firstTags FirstTag[]
+  questions Question[]
+  exercises Exercise[]
+}
+
+model Teacher {
+  id          Int     @id @default(autoincrement())
+  name        String  @default("hihi")
+  slug        String  @unique
+  birthday    String? @default("01-09-2022")
+  order       Int?    @default(5)
+  description String  @default("")
+  detail      String  @default("")
+  address     String? @default("")
+
+  avatar     String?
+  fb_url     String?            @default("")
+  tiktok_url String?            @default("")
+  createdAt  DateTime           @default(now())
+  updatedAt  DateTime           @updatedAt
+  subjects   SubjectOnTeacher[]
+  questions  Question[]
+  exercises  Exercise[]
+  courses    Course[]
+}
+
+model SubjectOnTeacher {
+  teacher   Teacher @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+  teacherId Int // relation scalar field (used in the `@relation` attribute above)
+  subject   Subject @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  subjectId Int // relation scalar field (used in the `@relation` attribute above)
+
+  @@id([teacherId, subjectId])
+}
+
+model Target {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  slug  String @unique
+  order Int?   @default(5)
+  description String             @default("")
+  detail      String             @default("")
+  updatedAt   DateTime           @updatedAt
+  createdAt   DateTime           @default(now())
+  firstTags   FirstTagOnTarget[]
+}
+
+model FirstTagOnTarget {
+  firstTag   FirstTag @relation(fields: [firstTagId], references: [id], onDelete: Cascade)
+  firstTagId Int // relation scalar field (used in the `@relation` attribute above)
+  target     Target   @relation(fields: [targetId], references: [id], onDelete: Cascade)
+  targetId   Int // relation scalar field (used in the `@relation` attribute above)
+
+  @@id([firstTagId, targetId])
+}
+
+model FirstTag {
+  id          Int                @id @default(autoincrement())
+  name        String
+  slug        String             @unique
+  order       Int?               @default(5)
+  description String             @default("")
+  detail      String             @default("")
+  updatedAt   DateTime           @default(now()) @updatedAt
+  createdAt   DateTime           @default(now())
+  subjectId   Int
+  subject     Subject            @relation(fields: [subjectId], references: [id])
+  targets     FirstTagOnTarget[]
+  secondTags  SecondTag[]
+  courses     CourseOnFirstTag[]
+}
+
+model SecondTag {
+  id          Int        @id @default(autoincrement())
+  name        String
+  slug        String     @unique
+  order       Int?       @default(5)
+  description String     @default("")
+  detail      String     @default("")
+  updatedAt   DateTime   @default(now()) @updatedAt
+  createdAt   DateTime   @default(now())
+  firstTagId  Int
+  firstTag    FirstTag   @relation(fields: [firstTagId], references: [id])
+  thirdTags   ThirdTag[]
+}
+
+// third
+
+model ThirdTag {
+  id          Int                  @id @default(autoincrement())
+  name        String
+  slug        String               @unique
+  description String               @default("")
+  detail      String               @default("")
+  order       Int?                 @default(5)
+  updatedAt   DateTime             @default(now()) @updatedAt
+  createdAt   DateTime             @default(now())
+  secondTagId Int
+  secondTag   SecondTag            @relation(fields: [secondTagId], references: [id])
+  questions   QuestionOnThirdTag[]
+}
+
+model QuestionOnThirdTag {
+  question   Question @relation(fields: [questionId], references: [id])
+  questionId Int // relation scalar field (used in the `@relation` attribute above)
+  thirdTag   ThirdTag @relation(fields: [thirdTagId], references: [id])
+  thirdTagId Int // relation scalar field (used in the `@relation` attribute above)
+
+  @@id([questionId, thirdTagId])
+}
+
+// Question
+
+model Question {
+  id            Int                  @id @default(autoincrement())
+  name          String?
+  level         Int                  @default(1)
+  description   String?
+  detail        String               @default("content")
+  video         String?
+  teacher       Teacher?             @relation(fields: [teacherId], references: [id])
+  teacherId     Int? // relation scalar field (used in the `@relation` attribute above)
+  createdAt     DateTime             @default(now())
+  updatedAt     DateTime             @updatedAt
+  thirdTags     QuestionOnThirdTag[]
+  exercises     QuestionOnExercise[]
+  code          String               @unique
+  answerExplain String?
+  answerVideo   String?
+  subjectId     Int
+  subject       Subject              @relation(fields: [subjectId], references: [id])
+}
+
+// Exercise
+
+model Exercise {
+  id          Int                  @id @default(autoincrement())
+  name        String               @default("name")
+  code        String               @unique
+  level       Int                  @default(1)
+  description String?
+  teacher     Teacher?             @relation(fields: [teacherId], references: [id])
+  teacherId   Int? // relation scalar field (used in the `@relation` attribute above)
+  questions   QuestionOnExercise[]
+  createdAt   DateTime             @default(now())
+  updatedAt   DateTime             @updatedAt
+  chapters    ExerciseOnChapter[]
+  subjectId   Int
+  subject     Subject              @relation(fields: [subjectId], references: [id])
+}
+
+model QuestionOnExercise {
+  question   Question @relation(fields: [questionId], references: [id])
+  questionId Int // relation scalar field (used in the `@relation` attribute above)
+  exercise   Exercise @relation(fields: [exerciseId], references: [id])
+  exerciseId Int // relation scalar field (used in the `@relation` attribute above)
+
+  @@id([questionId, exerciseId])
+}
+
+// Chapter
+
+model Chapter {
+  id          Int                  @id @default(autoincrement())
+  name        String               @default("name")
+  slug        String               @unique
+  video       String               @default("")
+  description String?
+  detail      String?
+  slide       String?
+  order       Int?                 @default(5)
+  time        Int?
+  createdAt   DateTime             @default(now())
+  updatedAt   DateTime             @updatedAt
+  course      Course               @relation(fields: [courseId], references: [id])
+  courseId    Int
+  documments  DocummentOnChapter[]
+  exercises   ExerciseOnChapter[]
+}
+
+model ExerciseOnChapter {
+  chapter    Chapter  @relation(fields: [chapterId], references: [id])
+  chapterId  Int // relation scalar field (used in the `@relation` attribute above)
+  exercise   Exercise @relation(fields: [exerciseId], references: [id])
+  exerciseId Int // relation scalar field (used in the `@relation` attribute above)
+
+  @@id([chapterId, exerciseId])
+}
+
+model DocummentOnChapter {
+  chapter     Chapter   @relation(fields: [chapterId], references: [id])
+  chapterId   Int // relation scalar field (used in the `@relation` attribute above)
+  documment   Documment @relation(fields: [docummentId], references: [id])
+  docummentId Int // relation scalar field (used in the `@relation` attribute above)
+
+  @@id([chapterId, docummentId])
+}
+
+// Documment
+
+model Documment {
+  id          Int                  @id @default(autoincrement())
+  name        String               @default("")
+  description String?              @default("")
+  detail      String?              @default("")
+  url         String               @default("")
+  createdAt   DateTime             @default(now())
+  updatedAt   DateTime             @updatedAt
+  chapters    DocummentOnChapter[]
+}
+
+// Course
+
+model Course {
+  id          Int                @id @default(autoincrement())
+  name        String             @default("name")
+  slug        String             @unique
+  description String?
+  detail      String?
+  content     String?
+  level       Int?
+  thumb       String?
+  color       String?
+  totalTime   Int?
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+  teacher     Teacher?           @relation(fields: [teacherId], references: [id], onDelete: SetNull)
+  teacherId   Int? // relation scalar field (used in the `@relation` attribute above)
+  firstTags   CourseOnFirstTag[]
+  chapters    Chapter[]
+}
+
+model CourseOnFirstTag {
+  course     Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  courseId   Int // relation scalar field (used in the `@relation` attribute above)
+  firstTag   FirstTag @relation(fields: [firstTagId], references: [id], onDelete: Cascade)
+  firstTagId Int // relation scalar field (used in the `@relation` attribute above)
+
+  @@id([courseId, firstTagId])
+}
